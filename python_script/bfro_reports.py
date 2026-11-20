@@ -27,7 +27,7 @@ geo = geo[(geo.longitude < -60) & (geo.latitude > 15)]
 c1, c2 = st.columns(2)
 yr_min, yr_max = int(geo.year.min()), int(geo.year.max())
 years = c1.slider("Year Range", yr_min, yr_max, (1990, yr_max))
-classes = c2.multiselect("Report Classification", sorted(geo.classification.unique()), default=["Class A", "Class B"])
+classes = c2.multiselect("Report Classification", sorted(geo.classification.unique()), default=["Class A"])
 
 sub = geo[geo.year.between(*years) & geo.classification.isin(classes)]
 
@@ -50,8 +50,11 @@ points = alt.Chart(sub).mark_circle(size=25, opacity=0.6).encode(
 
 st.altair_chart((base + points).properties(width=800, height=450), use_container_width=True)
 st.write(f"Showing {len(sub):,} reports.")
-st.write("h")
-# describes what features you are highlighting with your viz, the design choices you made (choices of scales, marks, colors, etc) to visualize your data appropriately, and what you would like to change if you had more time
+st.write("For this visualization I'm highlighting where there are Bigfoot sightings in North America, as well as the report's classification. " \
+"There's a slider where the audience can slide to look at specific years or time periods of Bigfoot sightings in North America. " \
+"There's also a multiselect option where the audience can choose to look at specific classes, a pairing of classes, or all the classes at once. " \
+"k")
+# the design choices you made (choices of scales, marks, colors, etc) to visualize your data appropriately, and what you would like to change if you had more time
 
 st.header("Visualization 2: When Sightings Are Reported")
 
